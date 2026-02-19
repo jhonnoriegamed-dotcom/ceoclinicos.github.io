@@ -113,6 +113,16 @@
       <div id="guias-grid" class="guias-grid"></div>
     </section>
 
+    <section id="quiz-materia" class="page">
+      <p id="quiz-file-warning" class="quiz-file-warning" aria-hidden="true" role="alert">Para que el quiz cargue las preguntas, abre la web con un servidor local. En la carpeta <strong>website_clinicos</strong> ejecuta: <code>npx serve .</code> o <code>python -m http.server 8080</code> y entra en <code>http://localhost:8080</code></p>
+      <h2 class="title" id="quiz-materia-title">Quiz</h2>
+      <p class="subtitle" id="quiz-materia-subtitle">Elige una materia en Inicio para jugar.</p>
+      <div class="quiz-materia-actions">
+        <button type="button" id="quiz-materia-btn-jugar" class="btn btn-primary btn-lg">Jugar</button>
+        <a href="#inicio" id="quiz-materia-volver" class="btn btn-ghost">Volver al Inicio</a>
+      </div>
+    </section>
+
     <section id="ia" class="page">
       <h2>IA</h2>
       <p>Herramientas con IA en la aplicación Ceoclinicos.</p>
@@ -142,10 +152,20 @@
       <p id="quiz-final-score" class="quiz-final-score"></p>
       <p id="quiz-final-mensaje" class="quiz-final-mensaje"></p>
       <button type="button" id="quiz-final-reintentar" class="btn btn-primary">Reintentar</button>
-      <button type="button" id="quiz-final-salir" class="btn btn-secondary">Volver a Estudiar</button>
+      <button type="button" id="quiz-final-salir" class="btn btn-secondary">Volver al Inicio</button>
     </section>
   </main>
 
+  <!-- Base URL del contenido: mismo directorio que index.html (permite servir desde subcarpeta o file) -->
+  <script>
+    (function () {
+      if (typeof window.CONTENT_BASE_URL !== 'string' || window.CONTENT_BASE_URL.length === 0) {
+        var path = window.location.pathname || '';
+        var lastSlash = path.lastIndexOf('/');
+        window.CONTENT_BASE_URL = lastSlash >= 0 ? path.substring(0, lastSlash + 1) : '';
+      }
+    })();
+  </script>
   <script src="content-paths.js"></script>
   <script src="pildoras.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>

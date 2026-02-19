@@ -436,6 +436,11 @@ body.quiz-active .main .quiz-final.visible { display: block !important; }
 .quiz-final-mensaje { color: var(--text-secondary); margin: 0 0 24px; }
 .quiz-final .btn { margin: 0 8px 8px 0; }
 
+.quiz-file-warning { display: none; margin-bottom: 16px; padding: 12px; background: #fff3cd; border: 1px solid #ffc107; border-radius: var(--radius); font-size: 0.9rem; color: #856404; }
+.quiz-file-warning code { background: rgba(0,0,0,0.06); padding: 2px 6px; border-radius: 4px; }
+.quiz-materia-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 24px; }
+.quiz-materia-actions .btn-lg { padding: 14px 24px; font-size: 1rem; }
+
 /* Auth modal (Login / Registro como RegistroActivity) */
 .auth-overlay {
   position: fixed;

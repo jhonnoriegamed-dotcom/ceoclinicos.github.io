@@ -1,36 +1,55 @@
 (function () {
   var grid = document.getElementById('materias-grid');
 
-  // Mismas materias que MainActivity (botones de la app), en español
-  var MATERIAS_INICIO = [
-    'General', 'Anatomía', 'Cardiología', 'Cardiovascular', 'Cirugía', 'Embriología',
-    'Fisiología', 'Fisiopatología', 'Gastroenterología', 'Gineco-Obstetricia', 'Histología',
+  // Fallback si no se puede cargar questions/es/categories.json
+  var MATERIAS_FALLBACK = [
+    'General', 'Anatomía', 'Cardiología', 'Cirugía', 'Embriología', 'Fisiología',
+    'Fisiopatología', 'Gastroenterología', 'Gineco-Obstetricia', 'Histología',
     'Medicina Interna', 'Neurología', 'Neumonología', 'Odontología', 'Oftalmología',
     'Pediatría', 'Psiquiatría', 'Traumatología', 'Urología', 'Microbiología',
-    'Otorrinolaringología', 'Endocrinología', 'Farmacología', 'Parasitología',
-    'Casos Clínicos', 'Verdadero/Falso'
+    'Otorrinolaringología', 'Endocrinología', 'Farmacología', 'Parasitología', 'Verdadero/Falso'
   ];
 
-  function renderMateriasInicio() {
+  function renderMateriasInicio(list) {
     if (!grid) return;
+    var items = Array.isArray(list) && list.length ? list : MATERIAS_FALLBACK.map(function (n) { return { name: n }; });
     grid.innerHTML = '';
-    MATERIAS_INICIO.forEach(function (nombre) {
+    items.forEach(function (item) {
+      var nombre = typeof item === 'string' ? item : (item.name || item.id || '');
       var a = document.createElement('a');
       a.className = 'materia-card materia-btn';
-      a.href = '#estudiar';
-      a.setAttribute('data-page-link', 'estudiar');
-      a.innerHTML = '<p class="materia-titulo">' + nombre + '</p>';
+      a.href = '#quiz-materia';
+      a.setAttribute('data-page-link', 'quiz-materia');
+      if (item && item.id) a.setAttribute('data-category-id', item.id);
+      a.innerHTML = '<p class="materia-titulo">' + escapeHtml(nombre) + '</p>';
       a.addEventListener('click', function (e) {
         e.preventDefault();
-        if (typeof showPage === 'function') showPage('estudiar');
-        if (typeof loadGuias === 'function') loadGuias();
-        location.hash = 'estudiar';
+        var catId = item.id || (nombre === 'Verdadero/Falso' ? 'true_false_general' : slugFromName(nombre));
+        window.selectedQuizCategory = { id: catId, name: nombre };
+        if (typeof showPage === 'function') showPage('quiz-materia');
+        if (typeof updateQuizMateriaPage === 'function') updateQuizMateriaPage();
+        location.hash = 'quiz-materia';
       });
       grid.appendChild(a);
     });
   }
 
-  if (grid) renderMateriasInicio();
+  function loadMateriasFromCategories() {
+    var url = window.ContentPaths && ContentPaths.categoriesList ? ContentPaths.categoriesList('es') : '';
+    if (!url) {
+      renderMateriasInicio(null);
+      return;
+    }
+    fetch(url)
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+      .then(function (data) {
+        var list = Array.isArray(data) ? data : (data.categories || data.items || []);
+        renderMateriasInicio(list);
+      })
+      .catch(function () { renderMateriasInicio(null); });
+  }
+
+  if (grid) loadMateriasFromCategories();
 
   function updatePillsDisplay() {
     var el = document.getElementById('pills-count');
@@ -80,6 +99,13 @@
     return div.innerHTML;
   }
 
+  function slugFromName(name) {
+    return (name || '').toLowerCase()
+      .replace(/\s+/g, '_')
+      .replace(/[áàä]/g, 'a').replace(/[éèë]/g, 'e').replace(/[íìï]/g, 'i')
+      .replace(/[óòö]/g, 'o').replace(/[úùü]/g, 'u').replace(/ñ/g, 'n');
+  }
+
   var navLinks = document.querySelectorAll('.nav-link');
   var pages = document.querySelectorAll('.page');
 
@@ -101,20 +127,24 @@
   navLinks.forEach(function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
-      showPage(a.getAttribute('data-page'));
+      var page = a.getAttribute('data-page');
+      showPage(page);
+      location.hash = page;
     });
   });
 
   window.addEventListener('hashchange', function () {
     var id = (location.hash || '#inicio').slice(1) || 'inicio';
-    var valid = ['inicio', 'estudiar', 'ia'].indexOf(id) !== -1;
+    var valid = ['inicio', 'estudiar', 'ia', 'quiz-materia'].indexOf(id) !== -1;
     showPage(valid ? id : 'inicio');
     if (valid && id === 'estudiar' && typeof loadGuias === 'function') loadGuias();
+    if (valid && id === 'quiz-materia' && typeof updateQuizMateriaPage === 'function') updateQuizMateriaPage();
   });
 
   if (location.hash) {
     var id = location.hash.slice(1);
-    if (['inicio', 'estudiar', 'ia'].indexOf(id) !== -1) showPage(id);
+    if (['inicio', 'estudiar', 'ia', 'quiz-materia'].indexOf(id) !== -1) showPage(id);
+    if (id === 'quiz-materia' && typeof updateQuizMateriaPage === 'function') updateQuizMateriaPage();
   }
 
   // --- Estudiar: solo guías ---
@@ -166,13 +196,99 @@
       });
   }
 
-  // --- Quiz (oculto; solo guías en Estudiar) ---
+  // --- Quiz (alineado con app: QuizActivity + QuestionFileManager/JsonUtil)
+  // App: MainActivity en app/src/main/java/com/ceoclinicos/MainActivity.kt
+  //      QuizActivity en app/src/main/java/com/ceoclinicos/QuizActivity.kt
+  // Rutas: categorías = questions/{lang}/categories/{id}_questions.json (QuestionFileManager.getQuestionFilePath)
+  //        temas = temas/{lang}/{topicId}_questions.json (getTopicQuestionFileName). correctAnswer 1-based.
   var quizQuestions = [];
   var quizTema = null;
   var quizIndex = 0;
   var quizScore = 0;
   var quizAnswered = false;
   var quizTotal = 10;
+
+  function shuffleArray(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function updateQuizMateriaPage() {
+    var titleEl = document.getElementById('quiz-materia-title');
+    var subtitleEl = document.getElementById('quiz-materia-subtitle');
+    var btnJugar = document.getElementById('quiz-materia-btn-jugar');
+    var fileWarning = document.getElementById('quiz-file-warning');
+    var cat = window.selectedQuizCategory;
+    if (titleEl) titleEl.textContent = 'Quiz';
+    if (subtitleEl) subtitleEl.textContent = cat ? 'Preguntas al azar de ' + cat.name + '. Pulsa Jugar para empezar.' : 'Elige una materia en Inicio para jugar.';
+    if (btnJugar) btnJugar.style.display = cat ? 'inline-block' : 'none';
+    if (fileWarning) {
+      var isFile = window.location.protocol === 'file:';
+      fileWarning.setAttribute('aria-hidden', !isFile);
+      fileWarning.style.display = isFile ? 'block' : 'none';
+    }
+  }
+
+  function startQuizWithQuestions(list, temaObj) {
+    quizTema = temaObj;
+    quizQuestions = list;
+    quizIndex = 0;
+    quizScore = 0;
+    document.body.classList.add('quiz-active');
+    document.getElementById('quiz-view').classList.add('visible');
+    document.getElementById('quiz-final').classList.remove('visible');
+    displayQuizQuestion();
+  }
+
+  function getCategoryQuestionsUrl(categoryId) {
+    if (!window.ContentPaths) return '';
+    return ContentPaths.categoryQuestions(categoryId, 'es');
+  }
+
+  document.getElementById('quiz-materia-btn-jugar').addEventListener('click', function () {
+    var cat = window.selectedQuizCategory;
+    if (!cat || !cat.id) {
+      alert('Elige una materia en Inicio.');
+      return;
+    }
+    var url = getCategoryQuestionsUrl(cat.id);
+    if (!url) {
+      alert('No se puede cargar el quiz para esta materia.');
+      return;
+    }
+    fetch(url)
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error(r.status + ' ' + r.statusText)); })
+      .then(function (data) {
+        var list = data.questions || (Array.isArray(data) ? data : []);
+        if (list.length === 0) {
+          alert('No hay preguntas para esta materia.');
+          return;
+        }
+        list = shuffleArray(list);
+        var take = Math.min(10, list.length);
+        startQuizWithQuestions(list.slice(0, take), { id: cat.id, titulo: cat.name });
+      })
+      .catch(function (err) {
+        var msg = 'Error al cargar las preguntas.';
+        if (window.location.protocol === 'file:') {
+          msg += ' Los navegadores no permiten cargar archivos locales (file://). Abre la carpeta website_clinicos en la terminal y ejecuta: npx serve . (o python -m http.server 8080) y entra en http://localhost:3000 (o :8080).';
+        } else {
+          msg += ' Comprueba que exista: ' + url;
+          if (err && err.message) msg += ' (' + err.message + ')';
+        }
+        alert(msg);
+      });
+  });
+
+  document.getElementById('quiz-materia-volver').addEventListener('click', function (e) {
+    e.preventDefault();
+    showPage('inicio');
+    location.hash = 'inicio';
+  });
 
   function startQuiz(tema) {
     var url = window.ContentPaths ? ContentPaths.temaQuestions(tema.id, 'es') : '';
@@ -188,21 +304,14 @@
           alert('No hay preguntas para este tema.');
           return;
         }
-        quizTema = tema;
-        quizQuestions = list;
-        quizTotal = Math.min(10, list.length);
-        quizQuestions = list.slice(0, quizTotal);
-        quizIndex = 0;
-        quizScore = 0;
-        document.body.classList.add('quiz-active');
-        document.getElementById('quiz-view').classList.add('visible');
-        document.getElementById('quiz-final').classList.remove('visible');
-        displayQuizQuestion();
+        list = shuffleArray(list);
+        var take = Math.min(10, list.length);
+        startQuizWithQuestions(list.slice(0, take), tema);
       })
       .catch(function () {
         var msg = 'Error al cargar las preguntas.';
         if (window.location.protocol === 'file:') {
-          msg += ' Abriste la página desde el disco (file://): el navegador no permite cargar otros archivos. Abre la web con un servidor local: en la carpeta website_clinicos ejecuta "npx serve" o "python -m http.server 8080" y entra en http://localhost:8080';
+          msg += ' Abre la web con un servidor local (npx serve o python -m http.server 8080).';
         } else {
           msg += ' Comprueba que exista temas/es/' + tema.id + '_questions.json';
         }
@@ -283,11 +392,13 @@
   });
 
   document.getElementById('quiz-final-salir').addEventListener('click', function () {
-    showPage('estudiar');
+    showPage('inicio');
+    location.hash = 'inicio';
   });
 
   document.getElementById('quiz-btn-salir').addEventListener('click', function () {
-    showPage('estudiar');
+    showPage('inicio');
+    location.hash = 'inicio';
   });
 
   // --- Auth: Login / Registro (como RegistroActivity) ---

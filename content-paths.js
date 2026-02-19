@@ -4,10 +4,11 @@
  * la web usa esta base (mismo origen cuando se sirve desde GitHub Pages).
  */
 window.ContentPaths = {
-  /** Base URL del contenido. En GitHub Pages suele ser '' (mismo origen) o el dominio. */
+  /** Base URL del contenido. En GitHub Pages suele ser '' (mismo origen). Con file:// o subcarpeta se usa el directorio de index.html. */
   getBase: function () {
     if (typeof window.CONTENT_BASE_URL === 'string' && window.CONTENT_BASE_URL.length > 0) {
-      return window.CONTENT_BASE_URL.replace(/\/$/, '') + '/';
+      var base = window.CONTENT_BASE_URL.replace(/\/$/, '');
+      return base ? base + '/' : '';
     }
     return '';
   },
@@ -20,6 +21,12 @@ window.ContentPaths = {
   /** guias.json (documentos PDF: título, descripción, enlace descarga) */
   guiasCatalog: function () {
     return this.getBase() + 'guias.json';
+  },
+
+  /** Lista de categorías (temas) para la página principal = questions/es/categories/*.json */
+  categoriesList: function (lang) {
+    lang = lang || 'es';
+    return this.getBase() + 'questions/' + lang + '/categories.json';
   },
 
   /**
