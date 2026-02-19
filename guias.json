@@ -41,6 +41,12 @@
       "titulo": "fdef",
       "descripcion": "fefefef",
       "url": "guias/pan.pdf"
+    },
+    {
+      "id": "1pancreatitis",
+      "titulo": "Pancreatitis aguda",
+      "descripcion": "Concepto, diagnostico y tratamiento de pancreatitis aguda.",
+      "url": "guias/1pancreatitis.pdf"
     }
   ]
 }
