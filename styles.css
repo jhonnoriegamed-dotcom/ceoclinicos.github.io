@@ -39,61 +39,81 @@ body {
 .topbar-inner {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   max-width: 100%;
   margin: 0;
-  padding: 8px 46px 8px 50px;
+  padding: 8px 12px;
   box-sizing: border-box;
+  gap: 8px;
 }
 .topbar-pills {
   flex: 0 0 auto;
-  padding-right: 16px;
 }
 .topbar-spacer {
-  flex: 1;
-  min-width: 0;
+  display: none;
 }
 .topbar-left {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: nowrap;
-  gap: 50px;
-  flex: 0 0 auto;
+  gap: 4px;
+  flex: 1 1 auto;
   min-width: 0;
 }
 .topbar-auth {
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 6px;
-  flex-shrink: 0;
-  padding-left: 16px;
+  gap: 4px;
   min-width: 0;
 }
 .btn-auth {
-  padding: 6px 12px;
+  padding: 6px 10px;
   border-radius: 8px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
   border: 1px solid rgba(255,255,255,0.8);
   background: transparent;
   color: white;
+  white-space: nowrap;
 }
 .btn-auth:hover { background: rgba(255,255,255,0.2); }
 .btn-auth-register { background: rgba(255,255,255,0.25); }
 .btn-auth-register:hover { background: rgba(255,255,255,0.35); }
 .topbar-user {
-  font-size: 13px;
-  margin-right: 8px;
+  font-size: 12px;
+  margin-right: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 140px;
+  max-width: 100px;
 }
 .btn-auth-logout { background: rgba(255,255,255,0.2); }
 .btn-auth-logout:hover { background: rgba(255,255,255,0.35); }
+
+@media (max-width: 480px) {
+  .topbar-inner { padding: 6px 8px; gap: 4px; }
+  .nav-link { padding: 5px 8px; font-size: 10px; }
+  .nav-icon-img { width: 20px; height: 20px; }
+  .topbar-left { gap: 2px; }
+  .btn-auth { padding: 4px 6px; font-size: 10px; }
+  .topbar-user { max-width: 60px; font-size: 10px; }
+  .pills-counter { padding: 3px 6px; min-width: 36px; }
+  .pills-count { font-size: 12px; }
+  .pills-icon { width: 16px !important; height: 16px !important; }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  .nav-link { padding: 6px 14px; }
+  .topbar-left { gap: 6px; }
+}
+@media (min-width: 769px) {
+  .nav-link { padding: 6px 24px; }
+  .topbar-left { gap: 12px; }
+}
 
 /* Contador de píldoras */
 .topbar-pills .pills-counter {
@@ -130,7 +150,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 6px 44px;
+  padding: 6px 12px;
   color: rgba(255,255,255,0.85);
   text-decoration: none;
   font-size: 11px;
@@ -138,7 +158,7 @@ body {
   border-radius: 8px;
   transition: background 0.2s, color 0.2s;
   flex: 0 0 auto;
-  min-width: 80px;
+  min-width: 0;
 }
 
 .nav-link:hover {
@@ -151,16 +171,8 @@ body {
   color: white;
 }
 
-@media (min-width: 600px) {
-  .nav-icon-img { width: 26px; height: 26px; }
-}
-
 .nav-label {
   white-space: nowrap;
-}
-
-@media (min-width: 600px) {
-  .nav-link { font-size: 12px; }
 }
 
 /* Contenido principal */
@@ -182,6 +194,7 @@ body {
   margin: 0 0 8px;
   font-size: 1.75rem;
   color: var(--primary);
+  text-align: center;
 }
 
 .subtitle {
