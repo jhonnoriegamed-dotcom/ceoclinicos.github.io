@@ -17,6 +17,11 @@ window.ContentPaths = {
     return this.getBase() + 'temas/temas.json';
   },
 
+  /** guias.json (documentos PDF: título, descripción, enlace descarga) */
+  guiasCatalog: function () {
+    return this.getBase() + 'guias.json';
+  },
+
   /**
    * Preguntas de un tema por idioma (como en la app: temas/es/{topicId}_questions.json).
    * @param {string} topicId - id del tema (ej: hipertension_arterial, ciclo_celular)

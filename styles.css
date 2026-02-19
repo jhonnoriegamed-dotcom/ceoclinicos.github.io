@@ -38,19 +38,99 @@ body {
 
 .topbar-inner {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 8px 4px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 8px 46px 8px 50px;
+  box-sizing: border-box;
+}
+.topbar-pills {
+  flex: 0 0 auto;
+  padding-right: 16px;
+}
+.topbar-spacer {
+  flex: 1;
+  min-width: 0;
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 22px;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.topbar-auth {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+  padding-left: 16px;
+  min-width: 0;
+}
+.btn-auth {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.8);
+  background: transparent;
+  color: white;
+}
+.btn-auth:hover { background: rgba(255,255,255,0.2); }
+.btn-auth-register { background: rgba(255,255,255,0.25); }
+.btn-auth-register:hover { background: rgba(255,255,255,0.35); }
+.topbar-user {
+  font-size: 13px;
+  margin-right: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+.btn-auth-logout { background: rgba(255,255,255,0.2); }
+.btn-auth-logout:hover { background: rgba(255,255,255,0.35); }
+
+/* Contador de píldoras */
+.topbar-pills .pills-counter {
+  margin-right: 0;
+}
+.pills-counter {
+  display: flex;
+  align-items: center;
   gap: 4px;
+  padding: 4px 10px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 20px;
+  min-width: 44px;
+  justify-content: center;
+}
+.pills-icon {
+  display: block;
+  object-fit: contain;
+}
+.pills-count {
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+}
+.nav-icon-img {
+  display: block;
+  margin-bottom: 2px;
+  object-fit: contain;
+  width: 24px;
+  height: 24px;
 }
 
 .nav-link {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 6px 8px;
+  padding: 6px 32px;
   color: rgba(255,255,255,0.85);
   text-decoration: none;
   font-size: 11px;
@@ -71,9 +151,8 @@ body {
   color: white;
 }
 
-.nav-icon {
-  font-size: 18px;
-  margin-bottom: 2px;
+@media (min-width: 600px) {
+  .nav-icon-img { width: 26px; height: 26px; }
 }
 
 .nav-label {
@@ -85,7 +164,6 @@ body {
 
 @media (min-width: 600px) {
   .nav-link { font-size: 12px; }
-  .nav-icon { font-size: 20px; }
 }
 
 /* Contenido principal */
@@ -184,3 +262,248 @@ body {
   position: relative;
   padding-right: 32px;
 }
+.materia-card.locked { opacity: 0.85; }
+.materia-card button, .materia-card[type="button"] { cursor: pointer; font: inherit; }
+.card-lock { position: absolute; top: 8px; right: 8px; font-size: 14px; }
+
+/* Pestañas Estudiar: Temas, Guías, Favoritos */
+.estudiar-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid rgba(0,0,0,0.08);
+}
+.estudiar-tab {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  border-radius: var(--radius) var(--radius) 0 0;
+  font: inherit;
+}
+.estudiar-tab:hover { color: var(--primary); }
+.estudiar-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+.estudiar-panel-content {
+  display: none;
+}
+.estudiar-panel-content.active {
+  display: block;
+}
+
+/* Grid y tarjetas de Guías (PDF) */
+.guias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.guia-card {
+  display: block;
+  padding: 16px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.guia-card:hover {
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.2);
+  border-color: var(--primary-light);
+}
+.guia-titulo {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--primary);
+  margin: 0 0 8px;
+}
+.guia-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+.guia-descarga {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.favoritos-empty {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 24px 16px;
+}
+
+/* Panel detalle Estudiar */
+.panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 50;
+  display: none;
+}
+.panel-overlay.visible { display: block; }
+.panel-detalle {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 400px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  z-index: 51;
+  display: none;
+}
+.panel-detalle.visible { display: block; }
+.panel-detalle h3 { margin: 0 0 8px; font-size: 1.2rem; color: var(--primary); }
+.panel-detalle p { margin: 0 0 8px; color: var(--text-secondary); font-size: 0.9rem; }
+.panel-bloqueado, .panel-acciones { margin-top: 12px; }
+.panel-acciones { display: flex; flex-wrap: wrap; gap: 8px; }
+.panel-acciones .btn { flex: 1; min-width: 120px; }
+.btn { display: inline-block; padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; border: none; text-decoration: none; text-align: center; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-secondary { background: var(--primary-light); color: var(--primary-dark); }
+.btn-ghost { background: transparent; color: var(--text-secondary); margin-top: 8px; }
+.btn-ghost:hover { color: var(--text-primary); }
+#estudiar-btn-guia.hidden { display: none; }
+
+/* Quiz: ocultar páginas normales cuando el quiz está activo */
+body.quiz-active .main > .page { display: none !important; }
+body.quiz-active .main .quiz-view.visible,
+body.quiz-active .main .quiz-final.visible { display: block !important; }
+
+.quiz-view, .quiz-final {
+  position: fixed;
+  inset: 0;
+  top: 56px;
+  background: var(--background);
+  z-index: 60;
+  padding: 16px;
+  overflow-y: auto;
+  display: none;
+}
+.quiz-view.visible, .quiz-final.visible { display: block; }
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.quiz-tema { font-weight: 600; color: var(--primary); }
+.quiz-counter { font-size: 0.9rem; color: var(--text-secondary); }
+.quiz-question { font-size: 1.1rem; font-weight: 600; margin: 0 0 16px; line-height: 1.4; }
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+.quiz-option {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  text-align: left;
+  background: var(--card-bg);
+  border: 2px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.quiz-option:hover { border-color: var(--primary-light); background: var(--primary-light); }
+.quiz-option:disabled { cursor: default; }
+.quiz-option.correct { border-color: var(--success); background: rgba(76, 175, 80, 0.15); }
+.quiz-option.incorrect { border-color: #E53935; background: rgba(229, 57, 53, 0.1); }
+.quiz-feedback { margin-top: 16px; padding: 12px; background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--primary-light); }
+.quiz-feedback-msg { font-weight: 600; margin: 0 0 8px; }
+.quiz-feedback-msg.correct { color: var(--success); }
+.quiz-feedback-msg.incorrect { color: #E53935; }
+.quiz-feedback-explicacion { font-size: 0.9rem; color: var(--text-secondary); margin: 0 0 12px; line-height: 1.4; }
+.quiz-nav { margin-top: 16px; }
+.quiz-final { text-align: center; padding-top: 40px; }
+.quiz-final h2 { color: var(--primary); margin-bottom: 16px; }
+.quiz-final-score { font-size: 2rem; font-weight: 700; margin: 0 0 8px; }
+.quiz-final-mensaje { color: var(--text-secondary); margin: 0 0 24px; }
+.quiz-final .btn { margin: 0 8px 8px 0; }
+
+/* Auth modal (Login / Registro como RegistroActivity) */
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  display: none;
+}
+.auth-overlay.visible { display: block; }
+.auth-panel {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 92%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  z-index: 201;
+  display: none;
+}
+.auth-panel.visible { display: block; }
+.auth-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: var(--background);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.auth-tab.active { background: var(--primary); color: white; }
+.auth-tab:hover:not(.active) { background: var(--primary-light); color: var(--primary-dark); }
+.auth-warning {
+  margin: 0 0 12px;
+  padding: 8px;
+  background: #ffebee;
+  color: #c62828;
+  font-size: 13px;
+  border-radius: 8px;
+  display: none;
+}
+.auth-warning.visible { display: block; }
+.auth-seccion label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.auth-seccion label input[type="text"],
+.auth-seccion label input[type="password"],
+.auth-seccion label select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.auth-seccion label input.error { border-color: #c62828; }
+.auth-radio { margin-right: 12px; }
+.auth-radio label { display: inline; margin-left: 4px; }
+.auth-seccion .btn { width: 100%; margin-top: 8px; }
+.auth-seccion.hidden { display: none; }
+#auth-btn-cerrar { width: 100%; margin-top: 12px; }
