@@ -621,4 +621,144 @@
   }
 
   if ((location.hash || '#inicio').slice(1) === 'estudiar') loadGuias();
+
+  // === IA Page Logic (replica IAReadOnlyActivity) ===
+  (function initIA() {
+    if (!window.IAService) return;
+    var tools = IAService.HERRAMIENTAS;
+    var select = document.getElementById('ia-tool-select');
+    var infoDesc = document.getElementById('ia-info-desc');
+    var btnGenerar = document.getElementById('ia-btn-generar');
+    var btnText = document.getElementById('ia-btn-text');
+    var btnCost = document.getElementById('ia-btn-cost');
+    var loadingEl = document.getElementById('ia-loading');
+    var loadingMsg = document.getElementById('ia-loading-msg');
+    var resultCard = document.getElementById('ia-result-card');
+    var resultContent = document.getElementById('ia-result-content');
+    if (!select || !btnGenerar) return;
+
+    var panelIds = ['diccionario','enciclopedia','patologia','diagnostico','comparativo','tutor','ordenes'];
+    var contenidoGuardado = {};
+
+    tools.forEach(function (h) {
+      var opt = document.createElement('option');
+      opt.value = h.id;
+      opt.textContent = h.nombre;
+      select.appendChild(opt);
+    });
+
+    function currentTool() { return IAService.getHerramienta(select.value); }
+
+    function showPanel(id) {
+      panelIds.forEach(function (pid) {
+        var el = document.getElementById('ia-panel-' + pid);
+        if (el) el.style.display = pid === id ? '' : 'none';
+      });
+    }
+
+    function updateInfo() {
+      var h = currentTool();
+      if (!h) return;
+      infoDesc.textContent = h.desc;
+      btnCost.textContent = h.costo + ' 💊';
+      showPanel(h.id);
+      if (contenidoGuardado[h.id]) {
+        resultCard.style.display = '';
+        resultContent.innerHTML = contenidoGuardado[h.id];
+      } else {
+        resultCard.style.display = 'none';
+        resultContent.innerHTML = '';
+      }
+    }
+
+    select.addEventListener('change', updateInfo);
+    updateInfo();
+
+    function getParams() {
+      var id = select.value;
+      switch (id) {
+        case 'diccionario':
+          return { terminos: document.getElementById('ia-input-diccionario').value.trim() };
+        case 'enciclopedia':
+          return { farmaco: document.getElementById('ia-input-enciclopedia').value.trim() };
+        case 'patologia':
+          return { patologia: document.getElementById('ia-input-patologia').value.trim() };
+        case 'diagnostico':
+          return { patologia: document.getElementById('ia-input-diagnostico').value.trim() };
+        case 'comparativo':
+          return { termino1: document.getElementById('ia-input-comp1').value.trim(), termino2: document.getElementById('ia-input-comp2').value.trim() };
+        case 'tutor':
+          return { pregunta: document.getElementById('ia-input-tutor').value.trim() };
+        case 'ordenes':
+          return { patologia: document.getElementById('ia-input-ordenes-pat').value.trim(), caracter: document.getElementById('ia-input-ordenes-car').value };
+        default:
+          return {};
+      }
+    }
+
+    function validate(params) {
+      var id = select.value;
+      if (id === 'comparativo') {
+        if (!params.termino1 || !params.termino2) return 'Ingresa ambos términos para comparar.';
+      } else if (id === 'ordenes') {
+        if (!params.patologia) return 'Ingresa la patología.';
+        if (!params.caracter) return 'Selecciona el carácter (Emergencia o Ambulatoria).';
+      } else {
+        var val = params.terminos || params.farmaco || params.patologia || params.pregunta || '';
+        if (!val) return 'Ingresa el dato solicitado.';
+      }
+      return null;
+    }
+
+    function setLoading(show, msg) {
+      loadingEl.style.display = show ? '' : 'none';
+      if (msg) loadingMsg.textContent = msg;
+      btnGenerar.disabled = show;
+    }
+
+    btnGenerar.addEventListener('click', function () {
+      var h = currentTool();
+      if (!h) return;
+      var params = getParams();
+      var err = validate(params);
+      if (err) { alert(err); return; }
+
+      var pills = window.PildorasService ? PildorasService.get() : 0;
+      if (pills < h.costo) {
+        alert('No tienes suficientes píldoras. Necesitas ' + h.costo + ' y tienes ' + pills + '.');
+        return;
+      }
+
+      setLoading(true, 'Generando ' + h.nombre + '…');
+      resultCard.style.display = 'none';
+
+      IAService.generar(h.id, params)
+        .then(function (html) {
+          if (window.PildorasService) {
+            PildorasService.spend(h.costo);
+            if (window.updatePillsDisplay) updatePillsDisplay();
+          }
+          contenidoGuardado[h.id] = html;
+          resultContent.innerHTML = html;
+          resultCard.style.display = '';
+          setLoading(false);
+        })
+        .catch(function (e) {
+          setLoading(false);
+          alert('Error: ' + (e.message || 'No se pudo generar el contenido.'));
+        });
+    });
+
+    panelIds.forEach(function (pid) {
+      var panel = document.getElementById('ia-panel-' + pid);
+      if (!panel) return;
+      var inputs = panel.querySelectorAll('input');
+      inputs.forEach(function (inp) {
+        inp.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') btnGenerar.click();
+        });
+      });
+    });
+  })();
+
 })();

@@ -127,8 +127,83 @@
     </section>
 
     <section id="ia" class="page">
-      <h2>IA</h2>
-      <p>Herramientas con IA en la aplicación Ceoclinicos.</p>
+      <h2 class="title">Herramientas IA</h2>
+      <p class="subtitle">Consultas médicas con inteligencia artificial</p>
+
+      <div class="ia-container">
+        <!-- Selector de herramienta -->
+        <div class="ia-selector">
+          <label for="ia-tool-select"><b>Herramienta:</b></label>
+          <select id="ia-tool-select" class="ia-select"></select>
+        </div>
+        <div class="ia-info-box" id="ia-info-box">
+          <span class="ia-info-icon">ℹ️</span>
+          <span id="ia-info-desc"></span>
+        </div>
+
+        <!-- Paneles de entrada (solo uno visible a la vez) -->
+        <div id="ia-panel-diccionario" class="ia-panel">
+          <label>Término(s) médico(s)
+            <input type="text" id="ia-input-diccionario" class="ia-input" placeholder="Ej: Odinofagia, Disnea">
+          </label>
+        </div>
+        <div id="ia-panel-enciclopedia" class="ia-panel" style="display:none;">
+          <label>Fármaco
+            <input type="text" id="ia-input-enciclopedia" class="ia-input" placeholder="Ej: Metformina">
+          </label>
+        </div>
+        <div id="ia-panel-patologia" class="ia-panel" style="display:none;">
+          <label>Patología
+            <input type="text" id="ia-input-patologia" class="ia-input" placeholder="Ej: Insuficiencia cardíaca">
+          </label>
+        </div>
+        <div id="ia-panel-diagnostico" class="ia-panel" style="display:none;">
+          <label>Patología
+            <input type="text" id="ia-input-diagnostico" class="ia-input" placeholder="Ej: Dolor torácico agudo">
+          </label>
+        </div>
+        <div id="ia-panel-comparativo" class="ia-panel" style="display:none;">
+          <label>Término 1
+            <input type="text" id="ia-input-comp1" class="ia-input" placeholder="Ej: Artritis reumatoide">
+          </label>
+          <label>Término 2
+            <input type="text" id="ia-input-comp2" class="ia-input" placeholder="Ej: Osteoartritis">
+          </label>
+        </div>
+        <div id="ia-panel-tutor" class="ia-panel" style="display:none;">
+          <label>Pregunta médica
+            <input type="text" id="ia-input-tutor" class="ia-input" placeholder="Ej: ¿Cuál es la fisiopatología del asma?">
+          </label>
+        </div>
+        <div id="ia-panel-ordenes" class="ia-panel" style="display:none;">
+          <label>Patología
+            <input type="text" id="ia-input-ordenes-pat" class="ia-input" placeholder="Ej: Neumonía adquirida en comunidad">
+          </label>
+          <label>Carácter
+            <select id="ia-input-ordenes-car" class="ia-select">
+              <option value="">Selecciona</option>
+              <option value="Emergencia">Emergencia</option>
+              <option value="Ambulatoria">Ambulatoria</option>
+            </select>
+          </label>
+        </div>
+
+        <button type="button" id="ia-btn-generar" class="btn btn-primary btn-lg ia-btn-generar">
+          <span id="ia-btn-text">Consultar IA</span>
+          <span id="ia-btn-cost" class="ia-btn-cost"></span>
+        </button>
+
+        <!-- Loading -->
+        <div id="ia-loading" class="ia-loading" style="display:none;">
+          <div class="ia-spinner"></div>
+          <p id="ia-loading-msg">Generando contenido…</p>
+        </div>
+
+        <!-- Resultado -->
+        <div id="ia-result-card" class="ia-result-card" style="display:none;">
+          <div id="ia-result-content" class="ia-result-content"></div>
+        </div>
+      </div>
     </section>
 
     <!-- Quiz (oculto hasta que se pulse Jugar) -->
@@ -176,6 +251,7 @@
   <script src="firebase-config.js"></script>
   <script src="auth-service.js"></script>
   <script src="temas-data.js"></script>
+  <script src="ia-service.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
