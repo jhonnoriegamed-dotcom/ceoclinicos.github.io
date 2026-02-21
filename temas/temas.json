@@ -7,7 +7,12 @@
       "pdfUrl": "https://www.dropbox.com/scl/fi/egaj7j3d6mqk1lopod4oc/Guia-Hipertensi-n-Arterial-Clinicos.pdf?rlkey=go3vt1w0z554hh6p8acpp5jt6&st=9tnn1t91&dl=1",
       "precioPildoras": "barato",
       "numPreguntas": 50,
-      "etiquetas": ["#cardiologia", "#medicina_interna", "#presion_arterial", "#sistema_cardiovascular"],
+      "etiquetas": [
+        "#cardiologia",
+        "#medicina_interna",
+        "#presion_arterial",
+        "#sistema_cardiovascular"
+      ],
       "tieneGuia": true
     },
     {
@@ -17,7 +22,12 @@
       "pdfUrl": "https://www.dropbox.com/scl/fi/anh5fmxxktioc7wzvbup0/1.-Guia-Colecistitis.pdf?rlkey=w40cs53d8v6his3sr3vf60t0n&st=hgcfw2qa&dl=1",
       "precioPildoras": "barato",
       "numPreguntas": 70,
-      "etiquetas": ["#gastroenterologia", "#cirugia", "#vesicula_biliar", "#abdomen"],
+      "etiquetas": [
+        "#gastroenterologia",
+        "#cirugia",
+        "#vesicula_biliar",
+        "#abdomen"
+      ],
       "tieneGuia": true
     },
     {
@@ -27,7 +37,13 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 313,
-      "etiquetas": ["#anatomia", "#abdomen", "#estructuras", "#organos", "#digestivo"],
+      "etiquetas": [
+        "#anatomia",
+        "#abdomen",
+        "#estructuras",
+        "#organos",
+        "#digestivo"
+      ],
       "tieneGuia": false
     },
     {
@@ -37,7 +53,17 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 200,
-      "etiquetas": ["#anatomia", "#cabeza", "#cuello", "#craneo","#ojo","#cara", "#musculos", "#nervios", "#vasos"],
+      "etiquetas": [
+        "#anatomia",
+        "#cabeza",
+        "#cuello",
+        "#craneo",
+        "#ojo",
+        "#cara",
+        "#musculos",
+        "#nervios",
+        "#vasos"
+      ],
       "tieneGuia": false
     },
     {
@@ -47,7 +73,15 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 197,
-      "etiquetas": ["#anatomia", "#dorso", "#columna", "#vertebras", "#musculos", "#ligamentos", "#nervios"],
+      "etiquetas": [
+        "#anatomia",
+        "#dorso",
+        "#columna",
+        "#vertebras",
+        "#musculos",
+        "#ligamentos",
+        "#nervios"
+      ],
       "tieneGuia": false
     },
     {
@@ -57,7 +91,16 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 200,
-      "etiquetas": ["#anatomia", "#hombro", "#brazo", "#antebrazo", "#mano", "#musculos", "#huesos", "#articulaciones"],
+      "etiquetas": [
+        "#anatomia",
+        "#hombro",
+        "#brazo",
+        "#antebrazo",
+        "#mano",
+        "#musculos",
+        "#huesos",
+        "#articulaciones"
+      ],
       "tieneGuia": false
     },
     {
@@ -67,7 +110,16 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 199,
-      "etiquetas": ["#anatomia", "#cadera", "#muslo", "#pierna", "#pie", "#musculos", "#huesos", "#articulaciones"],
+      "etiquetas": [
+        "#anatomia",
+        "#cadera",
+        "#muslo",
+        "#pierna",
+        "#pie",
+        "#musculos",
+        "#huesos",
+        "#articulaciones"
+      ],
       "tieneGuia": false
     },
     {
@@ -77,7 +129,12 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 219,
-      "etiquetas": ["#anatomia", "#pelvis", "reproductor", "urinario"],
+      "etiquetas": [
+        "#anatomia",
+        "#pelvis",
+        "reproductor",
+        "urinario"
+      ],
       "tieneGuia": false
     },
     {
@@ -87,7 +144,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 200,
-      "etiquetas": ["#anatomia", "#torax", "#costillas", "#esternon", "#pulmones", "#corazon"],
+      "etiquetas": [
+        "#anatomia",
+        "#torax",
+        "#costillas",
+        "#esternon",
+        "#pulmones",
+        "#corazon"
+      ],
       "tieneGuia": false
     },
     {
@@ -97,7 +161,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 200,
-      "etiquetas": ["#fisiologia", "#gastrointestinal", "#digestion", "#motilidad", "#enzimas", "#digestivo"],
+      "etiquetas": [
+        "#fisiologia",
+        "#gastrointestinal",
+        "#digestion",
+        "#motilidad",
+        "#enzimas",
+        "#digestivo"
+      ],
       "tieneGuia": false
     },
     {
@@ -107,7 +178,15 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 200,
-      "etiquetas": ["#fisiologia", "#neuromuscular", "#músculo", "#contraccion", "#placa_motora", "#acetilcolina", "#unidad_motora"],
+      "etiquetas": [
+        "#fisiologia",
+        "#neuromuscular",
+        "#músculo",
+        "#contraccion",
+        "#placa_motora",
+        "#acetilcolina",
+        "#unidad_motora"
+      ],
       "tieneGuia": false
     },
     {
@@ -117,7 +196,13 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 200,
-      "etiquetas": ["#fisiologia", "#circulacion", "#gasto_cardiaco", "#flujo_sanguineo", "#sistema_cardiovascular"],
+      "etiquetas": [
+        "#fisiologia",
+        "#circulacion",
+        "#gasto_cardiaco",
+        "#flujo_sanguineo",
+        "#sistema_cardiovascular"
+      ],
       "tieneGuia": false
     },
     {
@@ -127,7 +212,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 200,
-      "etiquetas": ["#fisiologia", "#cardiaca", "#corazon", "#marcapasos", "#conduccion", "#ciclo_cardiaco"],
+      "etiquetas": [
+        "#fisiologia",
+        "#cardiaca",
+        "#corazon",
+        "#marcapasos",
+        "#conduccion",
+        "#ciclo_cardiaco"
+      ],
       "tieneGuia": false
     },
     {
@@ -137,7 +229,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#fisiologia", "#renal", "#rinon", "#filtracion", "#nefrona", "#equilibrio_hidroelectrolitico"],
+      "etiquetas": [
+        "#fisiologia",
+        "#renal",
+        "#rinon",
+        "#filtracion",
+        "#nefrona",
+        "#equilibrio_hidroelectrolitico"
+      ],
       "tieneGuia": false
     },
     {
@@ -147,7 +246,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#fisiologia", "#neurofisiologia", "#sistema_nervioso", "#potencial_accion", "#sinapsis", "#neurotransmisores"],
+      "etiquetas": [
+        "#fisiologia",
+        "#neurofisiologia",
+        "#sistema_nervioso",
+        "#potencial_accion",
+        "#sinapsis",
+        "#neurotransmisores"
+      ],
       "tieneGuia": false
     },
     {
@@ -157,7 +263,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#fisiologia", "#respiratoria", "#pulmones", "#ventilacion", "#intercambio_gaseoso", "#respiracion"],
+      "etiquetas": [
+        "#fisiologia",
+        "#respiratoria",
+        "#pulmones",
+        "#ventilacion",
+        "#intercambio_gaseoso",
+        "#respiracion"
+      ],
       "tieneGuia": false
     },
     {
@@ -167,7 +280,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#fisiologia", "#sanguinea", "#sangre", "#eritrocitos", "#hemoglobina", "#coagulacion"],
+      "etiquetas": [
+        "#fisiologia",
+        "#sanguinea",
+        "#sangre",
+        "#eritrocitos",
+        "#hemoglobina",
+        "#coagulacion"
+      ],
       "tieneGuia": false
     },
     {
@@ -177,7 +297,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#fisiologia", "#dolor", "#nocicepcion", "#fibras_nerviosas", "#percepcion", "#transmision"],
+      "etiquetas": [
+        "#fisiologia",
+        "#dolor",
+        "#nocicepcion",
+        "#fibras_nerviosas",
+        "#percepcion",
+        "#transmision"
+      ],
       "tieneGuia": false
     },
     {
@@ -187,7 +314,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#fisiologia", "#reproductiva", "#ciclo_menstrual", "#hormonas", "#gametos", "#fertilidad"],
+      "etiquetas": [
+        "#fisiologia",
+        "#reproductiva",
+        "#ciclo_menstrual",
+        "#hormonas",
+        "#gametos",
+        "#fertilidad"
+      ],
       "tieneGuia": false
     },
     {
@@ -197,7 +331,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 200,
-      "etiquetas": ["#fisiologia", "#deportiva", "#ejercicio", "#entrenamiento", "#rendimiento", "#adaptacion"],
+      "etiquetas": [
+        "#fisiologia",
+        "#deportiva",
+        "#ejercicio",
+        "#entrenamiento",
+        "#rendimiento",
+        "#adaptacion"
+      ],
       "tieneGuia": false
     },
     {
@@ -207,7 +348,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#fisiologia", "#metabolismo", "#energia", "#anabolismo", "#catabolismo", "#tasa_metabolica"],
+      "etiquetas": [
+        "#fisiologia",
+        "#metabolismo",
+        "#energia",
+        "#anabolismo",
+        "#catabolismo",
+        "#tasa_metabolica"
+      ],
       "tieneGuia": false
     },
     {
@@ -217,7 +365,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#fisiologia", "#fiebre", "#termorregulacion", "#hipotalamo", "#pirogenos", "#temperatura"],
+      "etiquetas": [
+        "#fisiologia",
+        "#fiebre",
+        "#termorregulacion",
+        "#hipotalamo",
+        "#pirogenos",
+        "#temperatura"
+      ],
       "tieneGuia": false
     },
     {
@@ -227,7 +382,14 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#fisiologia", "#endocrina", "#hormonas", "#glandulas", "#regulacion", "#retroalimentacion"],
+      "etiquetas": [
+        "#fisiologia",
+        "#endocrina",
+        "#hormonas",
+        "#glandulas",
+        "#regulacion",
+        "#retroalimentacion"
+      ],
       "tieneGuia": false
     },
     {
@@ -237,7 +399,12 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#anestesia", "#farmacologia", "#dolor", "#bloqueo_nervioso"],
+      "etiquetas": [
+        "#anestesia",
+        "#farmacologia",
+        "#dolor",
+        "#bloqueo_nervioso"
+      ],
       "tieneGuia": false
     },
     {
@@ -247,7 +414,12 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#anestesia", "#opioides", "#analgesia", "#farmacologia"],
+      "etiquetas": [
+        "#anestesia",
+        "#opioides",
+        "#analgesia",
+        "#farmacologia"
+      ],
       "tieneGuia": false
     },
     {
@@ -257,7 +429,12 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#anestesia", "#gases", "#farmacologia", "#quirurgico"],
+      "etiquetas": [
+        "#anestesia",
+        "#gases",
+        "#farmacologia",
+        "#quirurgico"
+      ],
       "tieneGuia": false
     },
     {
@@ -267,7 +444,12 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#anestesia", "#intravenoso", "#farmacologia", "#quirurgico"],
+      "etiquetas": [
+        "#anestesia",
+        "#intravenoso",
+        "#farmacologia",
+        "#quirurgico"
+      ],
       "tieneGuia": false
     },
     {
@@ -277,7 +459,12 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 100,
-      "etiquetas": ["#biologia_celular", "#division_celular", "#mitosis", "#interfase"],
+      "etiquetas": [
+        "#biologia_celular",
+        "#division_celular",
+        "#mitosis",
+        "#interfase"
+      ],
       "tieneGuia": false
     },
     {
@@ -287,7 +474,12 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 1,
-      "etiquetas": ["#embriologia", "#reproduccion", "#cigoto", "#biologia_celular"],
+      "etiquetas": [
+        "#embriologia",
+        "#reproduccion",
+        "#cigoto",
+        "#biologia_celular"
+      ],
       "tieneGuia": false
     },
     {
@@ -297,7 +489,12 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 1,
-      "etiquetas": ["#embriologia", "#reproduccion", "#gametos", "#biologia_celular"],
+      "etiquetas": [
+        "#embriologia",
+        "#reproduccion",
+        "#gametos",
+        "#biologia_celular"
+      ],
       "tieneGuia": false
     },
     {
@@ -307,7 +504,12 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 50,
-      "etiquetas": ["#endocrinologia", "#metabolismo", "#glucosa", "#insulina"],
+      "etiquetas": [
+        "#endocrinologia",
+        "#metabolismo",
+        "#glucosa",
+        "#insulina"
+      ],
       "tieneGuia": false
     },
     {
@@ -317,7 +519,12 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 20,
-      "etiquetas": ["#cardiologia", "#emergencias", "#corazon", "#isquemia"],
+      "etiquetas": [
+        "#cardiologia",
+        "#emergencias",
+        "#corazon",
+        "#isquemia"
+      ],
       "tieneGuia": false
     },
     {
@@ -327,7 +534,25 @@
       "pdfUrl": "",
       "precioPildoras": "barato",
       "numPreguntas": 20,
-      "etiquetas": ["#neumonologia", "#infecciones", "#pulmones", "#respiratorio"],
+      "etiquetas": [
+        "#neumonologia",
+        "#infecciones",
+        "#pulmones",
+        "#respiratorio"
+      ],
+      "tieneGuia": false
+    },
+    {
+      "id": "cirugia_general",
+      "titulo": "Cirugia General",
+      "descripcion": "Preguntas de examen de posgrado",
+      "pdfUrl": "",
+      "precioPildoras": "caro",
+      "numPreguntas": 110,
+      "etiquetas": [
+        "#postgrado",
+        "#cirugia"
+      ],
       "tieneGuia": false
     }
   ]
